@@ -288,14 +288,15 @@ export default class JiraApi {
    * @param {boolean} fieldsByKeys - False by default, used to retrieve fields by key instead of id
    */
   findIssue(issueNumber, expand, fields, properties, fieldsByKeys) {
+    let query = {}
+    if (expand != undefined) Object.assign(query, {expand})
+    if (fields != undefined) Object.assign(query, {fields})
+    if (properties != undefined) Object.assign(query, {properties})
+    if (fieldsByKeys!= undefined) Object.assign(fieldsByKeys, {fieldsByKeys})
+    
     return this.doRequest(this.makeRequestHeader(this.makeUri({
       pathname: `/issue/${issueNumber}`,
-      query: {
-        expand: expand || '',
-        fields: fields || '*all',
-        properties: properties || '',
-        fieldsByKeys: fieldsByKeys || false,
-      },
+      query
     })));
   }
 
