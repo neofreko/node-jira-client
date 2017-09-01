@@ -35,7 +35,7 @@
     "lint": "eslint ./",
     "test": "npm run lint && mocha && npm run docs-build",
     "prepublishOnly": "npm run build && npm run docs-build",
-    "preinstall": "npm run build",
+    "postinstall": "npm install && npm run build",
     "release": "release"
   },
   "devDependencies": {
